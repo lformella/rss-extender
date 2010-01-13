@@ -1,5 +1,6 @@
 <?php
 
+$config['author']	= "http://www.larsformella.de/portfolio/programme-software/rss-extender/";
 $config['url']		= "http://rss.golem.de/rss.php?feed=RSS2.0";
 $config['base_url']	= "http://www.golem.de";
 $config['content']	= array("#<!--content-->(.*)<!--/content-->#Uis", 1);

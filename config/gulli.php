@@ -1,5 +1,6 @@
 <?php
 
+$config['author']	= "http://www.larsformella.de/portfolio/programme-software/rss-extender/";
 $config['url']		= "http://ticker.gulli.com/rss/";
 $config['base_url']	= "http://www.gulli.com";
 $config['content']	= array("#<!-- start ContentLeft -->(.*)<!-- end ContentLeft -->#Uis", 1);

@@ -1,5 +1,6 @@
 <?php
 
+$config['author']	= "http://www.larsformella.de/portfolio/programme-software/rss-extender/";
 $config['url']		= "http://www.heise.de/newsticker/heise-atom.xml";
 $config['base_url']	= "http://www.heise.de";
 $config['content']	= array("#<!--googleon: index-->(.*)<!--googleoff: index-->#Uis", 1);

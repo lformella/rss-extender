@@ -17,7 +17,7 @@
 // 
 
 // version 0.1
-// http://www.larsformella.de/lang/en/2010/01/11/rss-extender/
+// http://www.larsformella.de/portfolio/programme-software/rss-extender/
 
 require("./magpierss-0.72/rss_fetch.inc");
 require("./httprequest.php");
@@ -39,17 +39,22 @@ else
 {
 	if ($handle = opendir($folder))
 	{
-		echo "Feeds available:<br><br>";
+		echo "<html><head><title>RSS-Feeds</title>\n";
+		echo "<link href='favicon.ico' rel='icon' type='image/icon' />\n";
+		echo "<style>h1{text-align:center} #feeds{margin-left: auto; margin-right: auto; width:550px; padding: 20px; border: solid thin black}</style>\n";
+		echo "</head><body>\n";
+		echo "<h1>Feeds available:</h1>\n";
 		while (false !== ($file = readdir($handle)))
 		{
 			if (is_file($folder."/".$file) && $file != "DEFAULT.php")
 			{
 				require($folder."/".$file);
 				$name = substr($file, 0, -4);
-				echo "".$name."<br><a href='?feed=".$name."'>".$config['url']."</a><br><br>";
+				echo "<strong>".$name."</strong> <small>by ".$config['author']."</small><br><img src='".$config['base_url']."/favicon.ico' height='16' width='16' /> <a href='?feed=".$name."'>".$config['url']."</a><br><br>\n";
 			}
 		}
 		closedir($handle);
+		echo "</div>\n</body></html>";
 	}
 }
 
@@ -57,13 +62,27 @@ else
 
 function getFeed($options)
 {
+	$nocache = $_GET['nocache'];
+
+	$folder = "./tmp";
+	if(!is_dir($folder))
+	{
+		mkdir($folder);
+		if(!is_dir($folder))
+		{
+			// ok just disable caching
+			$nocache = true;
+		}
+	}
+
 	$folder = "./tmp/".$options['name'];
 	if(!is_dir($folder))
 	{
 		mkdir($folder);
 		if(!is_dir($folder))
 		{
-			return;
+			// ok just disable caching
+			$nocache = true;
 		}
 	}
 
@@ -117,7 +136,7 @@ function getFeed($options)
 				$time = strtotime($date);
 				$file = $folder."/".formatUrl($url);
 				#echo filemtime($file)." == ".$time."\n";
-				if(!$_GET['nocache'] && is_file($file) && filesize($file) > 0 && filemtime($file) == $time)
+				if(!$nocache && is_file($file) && filesize($file) > 0 && filemtime($file) == $time)
 				{
 					$html = file_get_contents($file);
 				}
@@ -125,7 +144,7 @@ function getFeed($options)
 				{
 					$html = getHtml($url, $options);
 
-					if(!$_GET['nocache'])
+					if(!$nocache)
 					{
 						$handle = fopen($file, "w");
 						fwrite($handle, $html);

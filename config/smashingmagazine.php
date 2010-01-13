@@ -1,5 +1,6 @@
 <?php
 
+$config['author']	= "http://www.larsformella.de/portfolio/programme-software/rss-extender/";
 $config['url']		= "http://rss1.smashingmagazine.com/feed/";
 $config['base_url']	= "http://www.smashingmagazine.com";
 $config['content']	= array("#<div class=\"entry-content\">(.*)</div>#Uis", 1);
