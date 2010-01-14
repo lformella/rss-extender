@@ -50,7 +50,7 @@ else
 			{
 				require($folder."/".$file);
 				$name = substr($file, 0, -4);
-				echo "<strong>".$name."</strong> <small>by ".$config['author']."</small><br><img src='".$config['base_url']."/favicon.ico' height='16' width='16' /> <a href='?feed=".$name."'>".$config['url']."</a><br><br>\n";
+				echo "<img src='".$config['base_url']."/favicon.ico' height='16' width='16' /> ".$config['base_url']." <strong>(".$name.")</strong> <small>(von <a href='".$config['author_url']."'>".$config['author']."</a>)</small><br><a href='?feed=".$name."'>".$config['url']."</a><br><hr>\n";
 			}
 		}
 		closedir($handle);
