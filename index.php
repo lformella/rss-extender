@@ -16,8 +16,7 @@
 //  along with this program.  If not, see <http://www.gnu.org/licenses/>.
 // 
 
-// version 0.1
-// http://www.larsformella.de/portfolio/programme-software/rss-extender/
+// version 0.2
 
 require("./magpierss-0.72/rss_fetch.inc");
 require("./httprequest.php");
