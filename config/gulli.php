@@ -10,10 +10,12 @@ $config['search']		= array("#<script type='text\/javascript'>.*<\/noscript>#Uis"
 								"#<div class=\"BreadCrumb\">.*<div class=\"inside\">#Uis",
 								"#<div class=\"NewsHeading\">.*<\/div>#Uis",
 								"#<!-- AddThis Button BEGIN -->.*<!-- AddThis Button END -->#Uis",
-								"#<div class=\"BreadCrumb\">.*#is");
+								"#<div class=\"BreadCrumb\">.*#is",
+								"#<script type=\"text/javascript\">.*</script>#Uis");
 $config['replace']		= array("",
 								"",
 								"<div>",
+								"",
 								"",
 								"",
 								"");
