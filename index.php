@@ -102,7 +102,7 @@ function getFeed($options)
 	}
 
 	// put the value of this tags into cdata
-	insertCDATA($rss->channel, array("description", "tagline"));
+	insertCDATA($rss->channel, array("description", "tagline", "copyright", "rights"));
 
 	$content = "";
 	$content .= "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n";
