@@ -5,7 +5,7 @@ $config['author_url']	= "http://www.larsformella.de/portfolio/programme-software
 $config['url']			= "http://rss.golem.de/rss.php?feed=RSS2.0";
 $config['base_url']		= "http://www.golem.de";
 $config['content']		= array("#<!--content-->(.*)<!--/content-->#Uis", 1);
-$config['search']		= array("#<script type=\"text\/javascript\">.*<!--.*var jws1 = new.*SWFObject\(\"(.*)\",\".*\",\"(.*)\",\"(.*)\",\"7\",\".*\"\);.*jws1.addVariable\(\"id\", \"(.*)\"\);.*<\/script>#Uis",
+$config['search']		= array("#<script type=\"text\/javascript\">.*<!--.* = new.*SWFObject\(\"(.*)\",\".*\",\"(.*)\",\"(.*)\",\"7\",\".*\"\);.*.addVariable\(\"id\", \"(.*)\"\);.*<\/script>#Uis",
 								"#<script( language=\"javascript\"|) type=\"text\/javascript\".*>.*<\/script>#Uis",
 								"#<li class=\".*\">(.*)<\/li>#Uis",
 								"#<ul class=\".*\">(.*)<\/ul>#Uis",
@@ -19,7 +19,7 @@ $config['replace']		= array("<embed type=\"application/x-shockwave-flash\" src=\
 								"",
 								"",
 								"");
-$config['split']		= array("#<A HREF=\"([^\"]*)\">weiter...<\/A>#Uis", 1);
+$config['split']		= array("#Fortsetzung: <a id=\"[^\"]*\" href=\"([^\"]*)\">#Uis", 1);
 $config['use_utf8']		= true;
 
 ?>
