@@ -95,6 +95,13 @@ function getFeed($options)
 	$rss = fetch_rss($options['url']);
 	#print_r($rss);
 
+
+	if($options['use_utf8'])
+	{
+		$rss->channel['title'] = utf8_encode($rss->channel['title']);
+		$rss->channel['title'] = htmlspecialchars($rss->channel['title']);
+	}
+
 	if($rss->channel['link_'])
 	{
 		$rss->channel['link'] = $rss->channel['link_'];
@@ -104,9 +111,14 @@ function getFeed($options)
 	// put the value of this tags into cdata
 	insertCDATA($rss->channel, array("description", "tagline", "copyright", "rights"));
 
+	#print_r($rss->channel);
 	$content = "";
 	$content .= "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n";
-	$content .= "<rss version=\"2.0\" xmlns:dc=\"http://purl.org/dc/elements/1.1/\" xmlns:itunes=\"http://www.itunes.com/dtds/podcast-1.0.dtd\">\n";
+	$content .= "<rss version=\"2.0\" 
+				xmlns:dc=\"http://purl.org/dc/elements/1.1/\" 
+				xmlns:itunes=\"http://www.itunes.com/dtds/podcast-1.0.dtd\" 
+				xmlns:atom=\"http://www.w3.org/2005/Atom\"
+			>\n";
 
 	$date = 0;
 	$count = 0;
@@ -262,17 +274,28 @@ function getArray($arr, $tree)
 			if(trim($res) != "")
 			{
 				// indent one tabulator per tree
+				$indent = "";
 				for($a = 0; $a < $tree; $a++)
 				{
 					$ret .= "	";
+					$indent .= "	";
 				}
 
+				// write pubDate the valid way
+				if($k=="pubdate")
+					$k="pubDate";
+
 				$ret .= "<$k>";
+
+				// add atom:link with rel="self"
+				if($k=="channel")
+					$ret .= "\n	".$indent."<atom:link href=\"http://".$_SERVER['SERVER_NAME'].$_SERVER['REQUEST_URI']."\" rel=\"self\" type=\"application/rss+xml\" />";
+
 				if(is_array($var))
 				{
 					$ret .= "\n";
 				}
-				$ret .= "$res";
+				$ret .= $res;
 
 				// indent one tabulator per tree
 				if(is_array($var))
