@@ -16,7 +16,7 @@
 //  along with this program.  If not, see <http://www.gnu.org/licenses/>.
 // 
 
-// version 0.3
+// version 0.4
 
 require("./magpierss-0.72/rss_fetch.inc");
 require("./httprequest.php");
@@ -114,11 +114,7 @@ function getFeed($options)
 	#print_r($rss->channel);
 	$content = "";
 	$content .= "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n";
-	$content .= "<rss version=\"2.0\" 
-				xmlns:dc=\"http://purl.org/dc/elements/1.1/\" 
-				xmlns:itunes=\"http://www.itunes.com/dtds/podcast-1.0.dtd\" 
-				xmlns:atom=\"http://www.w3.org/2005/Atom\"
-			>\n";
+	$content .= "<rss version=\"2.0\" xmlns:dc=\"http://purl.org/dc/elements/1.1/\" xmlns:itunes=\"http://www.itunes.com/dtds/podcast-1.0.dtd\" xmlns:atom=\"http://www.w3.org/2005/Atom\">\n";
 
 	$date = 0;
 	$count = 0;
@@ -153,7 +149,7 @@ function getFeed($options)
 			if($options['use_feed'] == "")
 			{
 				$time = strtotime($date);
-				$file = $folder."/".formatUrl($url);
+				$file = $folder."/".md5($url);
 
 				// get the article from cache
 				if(!$nocache && is_file($file) && filesize($file) > 0 && filemtime($file) == $time)
