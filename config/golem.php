@@ -20,6 +20,5 @@ $config['replace']		= array("<embed type=\"application/x-shockwave-flash\" src=\
 								"",
 								"");
 $config['split']		= array("#Fortsetzung: <a id=\"[^\"]*\" href=\"([^\"]*)\">#Uis", 1);
-$config['use_utf8']		= true;
 
 ?>
