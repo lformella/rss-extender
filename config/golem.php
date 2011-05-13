@@ -19,6 +19,6 @@ $config['replace']		= array("<embed type=\"application/x-shockwave-flash\" src=\
 								"",
 								"",
 								"");
-$config['split']		= array("#Fortsetzung: <a id=\"[^\"]*\" href=\"([^\"]*)\">#Uis", 1);
+$config['split']		= array("#<li><a href=\"([^\"]*)\">&rsaquo;</a></li>#Uis", 1);
 
 ?>
