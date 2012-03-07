@@ -93,6 +93,12 @@ class HTTPRequest
 		// redirection?
 		if(isset($headers['location']))
 		{
+			// forward fix
+			if(substr($headers['location'], 0, 4) != "http")
+			{
+				$headers['location'] = $this->_protocol . "://" . $this->_host . $headers['location'];
+			}
+
 			$http = new HTTPRequest($headers['location']);
 			return $http->DownloadToArray();
 		}
