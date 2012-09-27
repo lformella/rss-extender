@@ -59,7 +59,7 @@ class HTTPRequest
 		$crlf = "\r\n";
 
 		// generate request
-		$req = 'GET ' . $this->_uri . ' HTTP/1.0' . $crlf . 'Host: ' . $this->_host . $crlf . $crlf;
+		$req = 'GET ' . $this->_uri . ' HTTP/1.0' . $crlf . 'Host: ' . $this->_host . $crlf . 'Accept-Encoding: ' . $crlf . $crlf;
 
 		// fetch
 		$this->_fp = fsockopen(($this->_protocol == 'https' ? 'ssl://' : '') . $this->_host, $this->_port);
