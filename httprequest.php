@@ -2,9 +2,9 @@
 //  
 //  Taken from http://www.php.net/manual/de/function.fopen.php#58099 (info@b1g.de)
 //  and modified by Lars Formella <ich@larsformella.de>
-// 
+//
 
-class HTTPRequest
+class HTTPPRequest
 {
 	var $_fp; // HTTP socket
 	var $_url; // full URL
@@ -105,8 +105,8 @@ class HTTPRequest
 		}
 		else
 		{
-			return (array("url"     => $this->_url,
-			              "content" => $body));
+			return (array("url" => $this->_url,
+				"content" => $body));
 		}
 	}
 }
