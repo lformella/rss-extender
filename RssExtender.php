@@ -8,6 +8,7 @@ class RssExtender
 	private $configFolder = "./config";
 	private $contentNames = array("description", "summary", "atom_content", "content", "content:encoded");
 	private $itemNames = array("item", "entry");
+	private $timeNames = array("date", "updated", "pubDate");
 
 	/**
 	 * @return Feed[]
@@ -87,11 +88,7 @@ class RssExtender
 			}
 		}
 
-		$feedContent = file_get_contents($feed->url);
-		if ($feed->convertToUtf8)
-		{
-			//$feedContent = utf8_encode($feedContent);
-		}
+		$feedContent = $this->getUrlContent($feed->url);
 
 		$DOMDocument = new DOMDocument;
 		$DOMDocument->strictErrorChecking = false;
@@ -128,7 +125,7 @@ class RssExtender
 	}
 
 	/**
-	 * Extends one item with th full content of the specified link
+	 * Extends one item with the full content of the specified link
 	 *
 	 * @param Feed       $feed
 	 * @param DOMElement $domElement
@@ -139,6 +136,7 @@ class RssExtender
 		/** @var $contentNode DOMElement */
 		$contentNodes = array();
 		$link = "";
+		$time = 0;
 
 		foreach ($domElement->childNodes as $child)
 		{
@@ -157,63 +155,30 @@ class RssExtender
 			{
 				$contentNodes[] = $child;
 			}
+			else if (in_array($name, $this->timeNames))
+			{
+				$time = strtotime($value);
+			}
 		}
 
 		$file = $this->temporaryFolder . $feed->name . "/" . md5($link);
 		// get the article from cache
-		if ($useCache && is_file($file) && filesize($file) > 0)
+		if ($useCache && is_file($file) && filesize($file) > 0 && filemtime($file) == $time)
 		{
 			$raw = file_get_contents($file);
 		}
 		// load it from web
 		else
 		{
-			$raw = file_get_contents($link);
+			$raw = $this->getUrlContent($link);
 
 			$handle = fopen($file, "w");
 			fwrite($handle, $raw);
 			fclose($handle);
+			touch($file, $time);
 		}
 
-		$content = "";
-
-		if ($raw != "")
-		{
-			preg_match_all($feed->contentRegex, $raw, $match);
-			foreach ($match[$feed->contentRegexPosition] as $val)
-			{
-				$content .= $val;
-			}
-			/*
-			// image realtive to absolute path
-			$imgpath = substr($url, 0, strrpos($url, "/"));
-			$content = preg_replace("/(<(img|IMG)[^>]+src[\s]*=[\s]*(\"|'))(\/)([^\"']+)(\"|')/i", "$1" . $feed->baseUrl . "/$5$3", $content);
-			$content = preg_replace("/(<(img|IMG)[^>]+src[\s]*=[\s]*(\"|'))([^\"':]+)(\"|')/i", "$1" . $imgpath . "/$4$3", $content);
-			*/
-			// replace config stuff
-			if (is_array($feed->searchContent) && count($feed->searchContent) > 0)
-			{
-				$content = preg_replace($feed->searchContent, $feed->replaceContent, $content);
-			}
-			/*
-			if ($feed->convertToUtf8)
-			{
-				$content = u8_encode($content);
-			}
-
-			// multiple page splitting routine
-			if ($feed->contentSplitRegex != "")
-			{
-				preg_match($feed->contentSplitRegex, $raw, $match);
-				if ($match[$feed->contentSplitRegexPosition])
-				{
-					$content = preg_replace($feed->contentSplitRegex, "", $content);
-					$content .= "\n<br><hr><br>\n";
-					$content .= $this->getHtml($feed->baseUrl . $match[$feed->contentSplitRegexPosition], $feed);
-				}
-			}
-			*/
-		}
+		$content = $this->getFilteredContent($feed, $raw);
 
 		// replace old with new content
 		foreach ($contentNodes as $contentNode)
@@ -231,5 +196,61 @@ class RssExtender
 			}
 			$domElement->replaceChild($newNode, $contentNode);
 		}
+	}
+
+	/**
+	 * Get the content of the url
+	 *
+	 * @param string $url
+	 *
+	 * @return string
+	 */
+	private function getUrlContent($url)
+	{
+		return file_get_contents($url);
+	}
+
+	/**
+	 * @param Feed   $feed
+	 * @param string $originalContent
+	 *
+	 * @return string
+	 */
+	private function getFilteredContent(Feed $feed, $originalContent)
+	{
+		$content = "";
+
+		preg_match_all($feed->contentRegex, $originalContent, $match);
+		foreach ($match[$feed->contentRegexPosition] as $val)
+		{
+			$content .= $val;
+		}
+
+		/*
+		// image realtive to absolute path
+		$imgpath = substr($url, 0, strrpos($url, "/"));
+		$content = preg_replace("/(<(img|IMG)[^>]+src[\s]*=[\s]*(\"|'))(\/)([^\"']+)(\"|')/i", "$1" . $feed->baseUrl . "/$5$3", $content);
+		$content = preg_replace("/(<(img|IMG)[^>]+src[\s]*=[\s]*(\"|'))([^\"':]+)(\"|')/i", "$1" . $imgpath . "/$4$3", $content);
+		*/
+
+		// replace config stuff
+		if (is_array($feed->searchContent) && count($feed->searchContent) > 0)
+		{
+			$content = preg_replace($feed->searchContent, $feed->replaceContent, $content);
+		}
+
+		// multiple page splitting routine
+		if ($feed->contentSplitRegex != "")
+		{
+			preg_match($feed->contentSplitRegex, $originalContent, $match);
+			if ($match[$feed->contentSplitRegexPosition])
+			{
+				$content = preg_replace($feed->contentSplitRegex, "", $content);
+				$content .= "\n<br><hr><br>\n";
+				$content .= $this->getFilteredContent($feed, $this->getUrlContent($feed->baseUrl . $match[$feed->contentSplitRegexPosition]));
+			}
+		}
+
+		return $content;
 	}
 }
