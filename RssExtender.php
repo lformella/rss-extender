@@ -3,7 +3,7 @@
 // RssExtender.php
 //
 // Author:
-//	  Lars Formella <ich@larsformella.de>
+//      Lars Formella <ich@larsformella.de>
 //
 // Copyright (c) 2012 Lars Formella
 //
