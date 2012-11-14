@@ -1,14 +1,19 @@
 <?php
 
-require_once("./Feed.php");
+require_once("Feed.php");
 
 class RssExtender
 {
 	private $temporaryFolder = "./tmp";
-	private $configFolder = "./config";
 	private $contentNames = array("description", "summary", "atom_content", "content", "content:encoded");
+	private $configFolder;
 	private $itemNames = array("item", "entry");
 	private $timeNames = array("date", "updated", "pubDate");
+
+	function __construct()
+   	{
+		$this->configFolder = dirname(__FILE__) . "/config";
+	}
 
 	/**
 	 * @return Feed[]

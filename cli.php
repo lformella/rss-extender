@@ -16,7 +16,7 @@
 //  along with this program.  If not, see <http://www.gnu.org/licenses/>.
 //
 
-require_once("./RssExtender.php");
+require_once("RssExtender.php");
 $rssExtender = new RssExtender();
 
 if (isset($argv[1]))
