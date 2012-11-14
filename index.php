@@ -42,15 +42,17 @@ if (isset($_GET['feed']))
 else
 {
 	echo "<html><head><title>RSS-Feeds</title>\n";
-	echo "<style>h1{text-align:center} #feeds{margin-left: auto; margin-right: auto; width:550px; padding: 20px; border: solid thin black}</style>\n";
+	echo "<style>h1{text-align:center} .feed{margin-left: auto; margin-right: auto; width:600px; padding: 10px; margin-bottom: 4px; border: solid thin black}</style>\n";
 	echo "</head><body>\n";
 	echo "<h1>Available Feeds:</h1>\n";
 
 	$feeds = $rssExtender->getFeeds();
 	foreach ($feeds as $feed)
 	{
-		echo "<img src='" . $feed->baseUrl . "/favicon.ico' height='16' width='16' /> " . $feed->baseUrl . " <strong>(" . $feed->name . ")</strong> <small>(von <a href='" . $feed->authorUrl . "'>" . $feed->author . "</a>)</small><br><a href='?feed=" . $feed->name . "'>" . $feed->url . "</a><br><hr>\n";
+		echo "<div class='feed'>";
+		echo "<img src='" . $feed->baseUrl . "/favicon.ico' height='16' width='16' /> " . $feed->baseUrl . " <strong>(" . $feed->name . ")</strong> <small>(von <a href='" . $feed->authorUrl . "'>" . $feed->author . "</a>)</small><br><br><a href='?feed=" . $feed->name . "'>" . $feed->url . "</a>\n";
+		echo "</div>\n";
 	}
 
-	echo "</div>\n</body></html>";
+	echo "</body></html>";
 }
