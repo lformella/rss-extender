@@ -13,6 +13,5 @@ $config['replace']		= array(	"",
 									"",
 									"",
 									"");
-$config['use_utf8']		= true;
 
 ?>

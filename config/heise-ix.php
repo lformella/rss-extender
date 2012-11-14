@@ -1,7 +1,7 @@
 <?php
 
 $config['author']		= "Sven Fischer";
-$config['author_url']		= "http://blog.strubbl.de/";
+$config['author_url']	= "http://blog.strubbl.de/";
 $config['url']			= "http://www.heise.de/ix/news/news-atom.xml";
 $config['base_url']		= "http://www.heise.de";
 $config['content']		= array("#<!--googleon: index-->(.*)<!--googleoff: index-->#Uis", 1);

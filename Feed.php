@@ -1,4 +1,26 @@
 <?php
+//
+// Feed.php
+//
+// Author:
+//      Lars Formella <ich@larsformella.de>
+//
+// Copyright (c) 2012 Lars Formella
+//
+// This program is free software; you can redistribute it and/or modify
+// it under the terms of the GNU General Public License as published by
+// the Free Software Foundation; either version 3 of the License, or
+// (at your option) any later version.
+//
+// This program is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+// GNU General Public License for more details.
+//
+// You should have received a copy of the GNU General Public License
+// along with this program; if not, write to the Free Software
+// Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
+//
 
 class Feed
 {
@@ -48,25 +70,13 @@ class Feed
 	 * If you want to search the content with regexes you can do it here (helpful for filtering ads)
 	 * @var string[]
 	 */
-	public $searchContent = array("#<ads>.*<\/ads>#Uis");
+	public $searchContent = array();
 
 	/**
 	 * And replace the searches with new values here
 	 * @var string[]
 	 */
-	public $replaceContent = array("");
-
-	/**
-	 * Should this feed converted to UTF
-	 * @var bool
-	 */
-	public $convertToUtf8 = true;
-
-	/**
-	 * If there are some tags in this feed with html special chars or something, add them here
-	 * @var string[]
-	 */
-	public $additionalCdataTags = array();
+	public $replaceContent = array();
 
 	/**
 	 * Regex where to split the content
@@ -119,14 +129,6 @@ class Feed
 		if (array_key_exists("replace", $config))
 		{
 			$this->replaceContent = $config["replace"];
-		}
-		if (array_key_exists("use_utf8", $config))
-		{
-			$this->convertToUtf8 = $config["use_utf8"];
-		}
-		if (array_key_exists("cdata_tags", $config))
-		{
-			$this->additionalCdataTags = $config["cdata_tags"];
 		}
 		if (array_key_exists("split", $config))
 		{
