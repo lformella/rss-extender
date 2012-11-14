@@ -140,6 +140,11 @@ class RssExtender
 			closedir($handle);
 		}
 
+		if (strlen($content) < 50)
+		{
+			$content .= "<span style='font: #ff0000'>WARNING! Your feed content is an empty string!</span>";
+		}
+
 		return $this->clearWhitespaces($content);
 	}
 
