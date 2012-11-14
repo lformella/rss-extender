@@ -18,7 +18,7 @@
 
 // version 0.5
 
-require_once("./RssExtender.php");
+require_once("RssExtender.php");
 $rssExtender = new RssExtender();
 
 // print the feed
