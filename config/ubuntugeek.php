@@ -9,6 +9,5 @@ $config['search']		= array("#<script.*>([^<]*)<\/script>#Uis",
 								"#<a name=\"fb_share\".*</a></div>#Uis");
 $config['replace']		= array("",
 								"");
-$config['use_utf8']		= true;
 
 ?>

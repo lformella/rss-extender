@@ -7,7 +7,5 @@ $config['base_url']		= "http://normal.url.of.the.website"; // add the normal url
 $config['content']		= array("#(.*)#Uis", 1);
 $config['search	']		= array("#<ads>.*<\/ads>#Uis",);
 $config['replace']		= array("");
-$config['use_utf8']		= true;
-$config['cdata_tags']	= array("some-special-feed-tag"); // if there are some tags in this feed with htmlspecialchars or something, add them here
 
 ?>

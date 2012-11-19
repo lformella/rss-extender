@@ -1,6 +1,6 @@
 <?php
 //
-// index.php
+// cli.php
 //
 // Author:
 //      Lars Formella <ich@larsformella.de>
@@ -25,34 +25,32 @@
 require_once(__DIR__ . "/RssExtender.php");
 $rssExtender = new RssExtender();
 
-// print the feed
-if (isset($_GET['feed']))
+if (isset($argv[1]))
 {
-	$feed = $rssExtender->getFeed($_GET['feed']);
+	$feed = $rssExtender->getFeed($argv[1]);
 	if (!is_null($feed))
 	{
-		echo $rssExtender->getFeedContent($feed, isset($_GET['nocache']) ? $_GET['nocache'] : true);
+		echo $rssExtender->getFeedContent($feed, true) . "\n";
 	}
 	else
 	{
-		echo "Feed " . $_GET['feed'] . " not found";
+		echo "Feed " . $argv[1] . " not found\n";
+		printAvailableFeeds($rssExtender);
 	}
 }
-// print the overview
 else
 {
-	echo "<html><head><title>RSS-Feeds</title>\n";
-	echo "<style>h1{text-align:center} .feed{margin-left: auto; margin-right: auto; width:600px; padding: 10px; margin-bottom: 4px; border: solid thin black}</style>\n";
-	echo "</head><body>\n";
-	echo "<h1>Available Feeds:</h1>\n";
+	echo "Usage: php cli.php FEEDNAME\n";
+	printAvailableFeeds($rssExtender);
+}
+
+function printAvailableFeeds(RssExtender $rssExtender)
+{
+	echo "Available Feeds:\n";
 
 	$feeds = $rssExtender->getFeeds();
 	foreach ($feeds as $feed)
 	{
-		echo "<div class='feed'>";
-		echo "<img src='" . $feed->baseUrl . "/favicon.ico' height='16' width='16' /> " . $feed->baseUrl . " <strong>(" . $feed->name . ")</strong> <small>(von <a href='" . $feed->authorUrl . "'>" . $feed->author . "</a>)</small><br><br><a href='?feed=" . $feed->name . "'>" . $feed->url . "</a>\n";
-		echo "</div>\n";
+		echo "\t" . $feed->name . "\n";
 	}
-
-	echo "</body></html>";
 }

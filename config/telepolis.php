@@ -20,6 +20,5 @@ $config['replace']		= array("",
 								"",
 								"",
 								"");
-$config['cdata_tags'] 		= array("author_name");
 
 ?>
