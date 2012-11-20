@@ -105,7 +105,7 @@ class Feed
 		{
 			$this->author = $config["author"];
 		}
-		if (array_key_exists("author", $config))
+		if (array_key_exists("author_url", $config))
 		{
 			$this->authorUrl = $config["author_url"];
 		}
