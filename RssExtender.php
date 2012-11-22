@@ -255,14 +255,14 @@ class RssExtender
 	 */
 	private function getContentOfUrl(&$url)
 	{
-		$context = stream_context_create(array('http' => array('header' => "Host: ".parse_url($url)["host"]."\r\nUser-Agent: rss-extender 0.6", 'follow_location' => false, 'max_redirects' => '3')));
+		$originalUrlParts = parse_url($url);
+		$context = stream_context_create(array('http' => array('header' => "Host: ".$originalUrlParts["host"]."\r\nUser-Agent: rss-extender 0.6", 'follow_location' => false, 'max_redirects' => '3')));
 		$content = file_get_contents($url, false, $context);
 
 		foreach ($http_response_header as $header)
 		{
 			if (stripos($header, "location:", 0) === 0)
 			{
-				$originalUrlParts = parse_url($url);
 				$url = trim(substr($header, 9));
 				$newUrlParts = parse_url($url);
 
