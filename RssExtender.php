@@ -226,6 +226,7 @@ class RssExtender
 			if ($filteredContent != "")
 			{
 				$newNode = $contentNode->ownerDocument->createElement($contentNode->nodeName);
+				$newNode->setAttribute("type", "html");
 				$textNode = $contentNode->ownerDocument->createTextNode($filteredContent);
 				$newNode->appendChild($textNode);
 
