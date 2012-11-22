@@ -239,7 +239,7 @@ class RssExtender
 			// append warning!
 			else
 			{
-				$contentNode->nodeValue .= "\n\n<br /><br /><span style='font: #ff0000'>WARNING! Your Rss-Extender rules returned an empty string!</span>";
+				$contentNode->nodeValue .= "\n\n<br /><br /><span style='font: #ff0000'>WARNING! Your Rss-Extender rules returned an empty string for link: " .  $link . "</span>";
 			}
 		}
 
@@ -255,7 +255,7 @@ class RssExtender
 	 */
 	private function getContentOfUrl(&$url)
 	{
-		$context = stream_context_create(array('http' => array('follow_location' => false)));
+		$context = stream_context_create(array('http' => array('header' => "Host: ".parse_url($url)["host"]."\r\nUser-Agent: rss-extender 0.6", 'follow_location' => false, 'max_redirects' => '3')));
 		$content = file_get_contents($url, false, $context);
 
 		foreach ($http_response_header as $header)
