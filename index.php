@@ -44,6 +44,7 @@ else
 	echo "<html><head><title>RSS-Feeds</title>\n";
 	echo "<style>h1{text-align:center} .feed{margin-left: auto; margin-right: auto; width:600px; padding: 10px; margin-bottom: 4px; border: solid thin black}</style>\n";
 	echo "</head><body>\n";
+	echo "<img style='display: block; margin-left: auto; margin-right: auto; width: 600px' src='rss-extender.png'>\n";
 	echo "<h1>Available Feeds:</h1>\n";
 
 	$feeds = $rssExtender->getFeeds();
