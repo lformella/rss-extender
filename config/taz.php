@@ -1,7 +1,7 @@
 <?php
 $config['author']     = "Rafael Bugajewski";
 $config['author_url'] = "http://www.juicycocktail.com/";
-$config['url']        = "http://www.taz.de/1/rss.xml";
+$config['url']        = "http://www.taz.de/rss.xml";
 $config['base_url']   = "http://www.taz.de/";
 $config['content']    = array("#</h1>(.*)<\/div><div class=\"sectfoot\">#Uis", 1);
 // search[i] match is replaced with corresponding replace[i]
