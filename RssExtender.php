@@ -256,41 +256,58 @@ class RssExtender
 	 */
 	private function getContentOfUrl(&$url)
 	{
-		$context = stream_context_create(array('http' => array('follow_location' => false)));
-		$content = file_get_contents($url, false, $context);
-
-		foreach ($http_response_header as $header)
+		if (function_exists('curl_version'))
 		{
-			if (stripos($header, "location:", 0) === 0)
+			$curl = curl_init();
+			curl_setopt($curl, CURLOPT_URL, $url);
+			curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
+			curl_setopt($curl, CURLOPT_FOLLOWLOCATION, true);
+			$content = curl_exec($curl);
+			$url = curl_getinfo($curl, CURLINFO_EFFECTIVE_URL);
+			curl_close($curl);
+		}
+		else if (ini_get('allow_url_fopen'))
+		{
+			$context = stream_context_create(array('http' => array('follow_location' => false)));
+			$content = file_get_contents($url, false, $context);
+
+			foreach ($http_response_header as $header)
 			{
-				$originalUrlParts = parse_url($url);
-				$url = trim(substr($header, 9));
-				$newUrlParts = parse_url($url);
-
-				if (!isset($newUrlParts["host"]))
+				if (stripos($header, "location:", 0) === 0)
 				{
-					$url = isset($newUrlParts["scheme"]) ? $newUrlParts["scheme"] : $originalUrlParts["scheme"];
-					$url .= "://" . $originalUrlParts["host"];
-					if (isset($newUrlParts["user"]) && isset($newUrlParts["pass"]))
-					{
-						$url .= $newUrlParts["user"] . ":" . $newUrlParts["pass"] . "@";
-					}
-					if (isset($newUrlParts["path"]))
-					{
-						$url .= $newUrlParts["path"];
-					}
-					if (isset($newUrlParts["query"]))
-					{
-						$url .= "?" . $newUrlParts["query"];
-					}
-					if (isset($newUrlParts["fragment"]))
-					{
-						$url .= "#" . $newUrlParts["fragment"];
-					}
-				}
+					$originalUrlParts = parse_url($url);
+					$url = trim(substr($header, 9));
+					$newUrlParts = parse_url($url);
 
-				$content = $this->getContentOfUrl($url);
+					if (!isset($newUrlParts["host"]))
+					{
+						$url = isset($newUrlParts["scheme"]) ? $newUrlParts["scheme"] : $originalUrlParts["scheme"];
+						$url .= "://" . $originalUrlParts["host"];
+						if (isset($newUrlParts["user"]) && isset($newUrlParts["pass"]))
+						{
+							$url .= $newUrlParts["user"] . ":" . $newUrlParts["pass"] . "@";
+						}
+						if (isset($newUrlParts["path"]))
+						{
+							$url .= $newUrlParts["path"];
+						}
+						if (isset($newUrlParts["query"]))
+						{
+							$url .= "?" . $newUrlParts["query"];
+						}
+						if (isset($newUrlParts["fragment"]))
+						{
+							$url .= "#" . $newUrlParts["fragment"];
+						}
+					}
+
+					$content = $this->getContentOfUrl($url);
+				}
 			}
+		}
+		else
+		{
+			$content = "<span style='font: #ff0000'>WARNING! curl and allow_url_open are deactivated / disabled.</span>";
 		}
 
 		return $content;
