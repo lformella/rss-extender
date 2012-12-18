@@ -4,7 +4,7 @@ $config['author']		= "Sven Fischer";
 $config['author_url']	= "http://blog.strubbl.de/";
 $config['url']			= "http://www.beichthaus.com/feed.rss2";
 $config['base_url']		= "http://www.beichthaus.com";
-$config['content']		= array("#<div class=\"bodytext\" style=\"padding:0 0 20px 12px;width:100%px;\">(.*)<div class=\"tagtext\">#Uis", 1);
+$config['content']		= array("#<p class=\"beichttext\">(.*)</p>#Uis", 1);
 $config['search']		= array("#<nobr>#Uis",
 								"#<a href=\"#Uis",
 								"#<script type=\"text/javascript\"> initMap\(.*\); </script>#Uis",
