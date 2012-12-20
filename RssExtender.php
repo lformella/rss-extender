@@ -124,7 +124,7 @@ class RssExtender
 		$DOMDocument->strictErrorChecking = false;
 		$DOMDocument->loadXML($feedContent);
 		$lastTime = $this->traverseDomAndExtendItemsAndGetEarliestChangedTime($feed, $DOMDocument->childNodes, $useCache);
-		$content = $DOMDocument->saveXML();
+		$content = @$DOMDocument->saveXML();
 
 		// clear old temporary files
 		if ($handle = opendir($folder))
