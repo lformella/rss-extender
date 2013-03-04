@@ -240,7 +240,7 @@ class RssExtender
 			// append warning!
 			else
 			{
-				$contentNode->nodeValue .= "\n\n<br /><br /><span style='font: #ff0000'>WARNING! Your Rss-Extender rules returned an empty string!</span>";
+				$contentNode->nodeValue .= "\n\n<br /><br /><span style='font: #ff0000'>WARNING! Your Rss-Extender rules returned an empty string for link: " .  $link . "</span>";
 			}
 		}
 
@@ -262,13 +262,15 @@ class RssExtender
 			curl_setopt($curl, CURLOPT_URL, $url);
 			curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
 			curl_setopt($curl, CURLOPT_FOLLOWLOCATION, true);
+			curl_setopt($curl, CURLOPT_USERAGENT, "rss-extender 0.6");
 			$content = curl_exec($curl);
 			$url = curl_getinfo($curl, CURLINFO_EFFECTIVE_URL);
 			curl_close($curl);
 		}
 		else if (ini_get('allow_url_fopen'))
 		{
-			$context = stream_context_create(array('http' => array('follow_location' => false)));
+			$originalUrlParts = parse_url($url);
+			$context = stream_context_create(array('http' => array('header' => "Host: ".$originalUrlParts["host"]."\r\nUser-Agent: rss-extender 0.6", 'follow_location' => false, 'max_redirects' => '3')));
 			$content = file_get_contents($url, false, $context);
 
 			foreach ($http_response_header as $header)
