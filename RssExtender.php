@@ -262,6 +262,7 @@ class RssExtender
 			curl_setopt($curl, CURLOPT_URL, $url);
 			curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
 			curl_setopt($curl, CURLOPT_FOLLOWLOCATION, true);
+			curl_setopt($curl, CURLOPT_USERAGENT, "rss-extender 0.6");
 			$content = curl_exec($curl);
 			$url = curl_getinfo($curl, CURLINFO_EFFECTIVE_URL);
 			curl_close($curl);
