@@ -4,7 +4,7 @@ $config['author']		= "Lars Formella";
 $config['author_url']	= "http://www.larsformella.de/portfolio/programme-software/rss-extender/";
 $config['url']			= "http://ticker.gulli.com/rss/";
 $config['base_url']		= "http://www.gulli.com";
-$config['content']		= array("#</h2>[\r\n\t]*(<p>|)(.*)</p>[\r\n\t]*<p class=\"_redakteur( Right P0|)\">#Uis", 2);
+$config['content']		= array("#<h2 class=\"newsTeaser\">(.*)<div class=\"_bookmark\"><div id=\"socialshareprivacy\"></div></div>#Uis", 1);
 $config['search']		= array("#<script type='text\/javascript'>.*<\/noscript>#Uis",
 								"#<h4>.*</h4>#Uis",
 								"#<div class=\"BreadCrumb\">.*<div class=\"inside\">#Uis",
@@ -12,10 +12,12 @@ $config['search']		= array("#<script type='text\/javascript'>.*<\/noscript>#Uis"
 								"#<!-- AddThis Button BEGIN -->.*<!-- AddThis Button END -->#Uis",
 								"#<div class=\"BreadCrumb\">.*#is",
 								"#<script type=\"text/javascript\">.*</script>#Uis",
-								"#http://exit.gulli.com/url/#Uis"); // stupid gulli puts crap in html
+								"#http://exit.gulli.com/url/#Uis", // stupid gulli puts crap in html
+								"#<embed src=.*</embed>#Uis"); // no flash crap pls
 $config['replace']		= array("",
 								"",
 								"<div>",
+								"",
 								"",
 								"",
 								"",
