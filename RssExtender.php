@@ -240,7 +240,7 @@ class RssExtender
 			// append warning!
 			else
 			{
-				$contentNode->nodeValue .= "\n\n<br /><br /><span style='font: #ff0000'>WARNING! Your Rss-Extender rules returned an empty string for link: " .  $link . "</span>";
+				@$contentNode->nodeValue .= "\n\n<br /><br /><span style='font: #ff0000'>WARNING! Your Rss-Extender rules returned an empty string for link: " .  $link . "</span>";
 			}
 		}
 
