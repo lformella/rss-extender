@@ -354,11 +354,11 @@ class RssExtender
 
 		// image relative to absolute paths
 		$imagePath = substr($url, 0, strrpos($url, "/"));
-		$filteredContent = preg_replace("/(<(img|IMG)[^>]+src[\s]*=[\s]*(\"|'))(\/)([^\"']+)(\"|')/i", "$1" . $feed->baseUrl . "/$5$3", $filteredContent);
-		$filteredContent = preg_replace("/(<(img|IMG)[^>]+src[\s]*=[\s]*(\"|'))([^\"':]+)(\"|')/i", "$1" . $imagePath . "/$4$3", $filteredContent);
+		$filteredContent = preg_replace("/(<(img|IMG)[^>]*[\s]+src[\s]*=[\s]*(\"|'))(\/)([^\"']+)(\"|')/i", "$1" . $feed->baseUrl . "/$5$3", $filteredContent);
+		$filteredContent = preg_replace("/(<(img|IMG)[^>]*[\s]+src[\s]*=[\s]*(\"|'))([^\"':]+)(\"|')/i", "$1" . $imagePath . "/$4$3", $filteredContent);
 
 		// links relative to absolute paths
-		$filteredContent = preg_replace("/(href[\s]*=[\s]*(\"|'))(\/)([^\"']+)(\"|')/i", "$1" . $feed->baseUrl . "/$4$2", $filteredContent);
+		$filteredContent = preg_replace("/([\s]+href[\s]*=[\s]*(\"|'))(\/)([^\"']+)(\"|')/i", "$1" . $feed->baseUrl . "/$4$2", $filteredContent);
 
 		// search and replace stuff
 		if (is_array($feed->searchContent) && count($feed->searchContent) > 0)
