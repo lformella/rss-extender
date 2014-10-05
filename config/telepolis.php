@@ -1,24 +1,10 @@
 <?php
+include(__DIR__ . "/heise.php");
 
-$config['author']		= "Lars Formella";
-$config['author_url']		= "http://www.larsformella.de/portfolio/programme-software/rss-extender/";
-$config['url']			= "http://www.heise.de/tp/news-atom.xml";
-$config['base_url']		= "http://www.heise.de";
-$config['content']		= array("#<!--googleon: index-->(.*)<!--googleoff: index-->#Uis", 1);
-$config['search']		= array("#<span class=\"bildunterschrift\">.*<\/span>#Uis",
-								"#<span class=\"source\">.*<\/span>#Uis",
-								"#<h1>.*<\/h1>#Uis",
-								"#<!-- RSPEAK_STOP -->#Uis",
-								"#<!-- RSPEAK_START -->#Uis",
-								"#<content_ad_possible>#Uis",
-								"#<script.*>.*<\/script>#Uis");
-$config['replace']		= array("",
-								"",
-								"",
-								"",
-								"",
-								"",
-								"",
-								"");
+$config['url']			= "http://www.heise.de/tp/news.rdf";
+$config['content']  = array("#<div class=\"mar0\">(.*)<div id=\"breadcrumb\">#Uis", 1);
+#$config['split']    = array("#<a href=\"([^\"]*)\" class=\"page next\" rel=\"next\">Nächste Seite</a>#Uis", 1); #split does not work here due to crippled website. we would need guid and 1st match here to create link to second page
+array_push($config['search'],  "#<span class=\"vcard\" id=.*</span>\s*</div>#Uis");
+array_push($config['replace'], "");
 
 ?>
