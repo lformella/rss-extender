@@ -122,7 +122,7 @@ class RssExtender
 
 		$DOMDocument = new DOMDocument;
 		$DOMDocument->strictErrorChecking = false;
-		$DOMDocument->loadXML($feedContent);
+		@$DOMDocument->loadXML($feedContent);
 		$lastTime = $this->traverseDomAndExtendItemsAndGetEarliestChangedTime($feed, $DOMDocument->childNodes, $useCache);
 		$content = @$DOMDocument->saveXML();
 
