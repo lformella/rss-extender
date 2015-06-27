@@ -370,7 +370,7 @@ class RssExtender
 		if ($feed->contentSplitRegex != "")
 		{
 			preg_match($feed->contentSplitRegex, $originalContent, $match);
-			if ($match[$feed->contentSplitRegexPosition])
+			if (isset($match[$feed->contentSplitRegexPosition]) && $match[$feed->contentSplitRegexPosition])
 			{
 				$filteredContent = preg_replace($feed->contentSplitRegex, "", $filteredContent);
 				$filteredContent .= "\n<br><hr><br>\n";
