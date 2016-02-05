@@ -323,7 +323,7 @@ class RssExtender
 	 *
 	 * @return string
 	 */
-	private function getFilteredContentOfUrl(Feed $feed, $url, $useCache, $time)
+	public function getFilteredContentOfUrl(Feed $feed, $url, $useCache, $time)
 	{
 		$file = $this->temporaryFolder . "/" . $feed->name . "/" . md5($url);
 		// get the article from cache
