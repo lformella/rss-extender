@@ -19,5 +19,6 @@ $config['replace'] 		= array("",
 	"",
 	""
 	);
+$config['test_urls'] = array("http://www.pro-linux.de/-0h215ad0", "http://www.pro-linux.de/-0h215ae7");
 
 ?>

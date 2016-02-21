@@ -13,4 +13,7 @@ $config['content']    = array("#<div class='post-body entry-content' id='.*' ite
 //$config['replace']    = array("");
 
 $config['use_utf8']	= false;
+$config['test_urls'] = array("http://www.der-postillon.com/2016/02/sonntagsfrage-glauben-sie-dass-die_21.html",
+                             "http://www.der-postillon.com/2016/02/lg-electronics-verbietet-verwendung-von.html"
+                            );
 ?>

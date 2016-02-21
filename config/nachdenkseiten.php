@@ -8,5 +8,6 @@ $config['content']    = array("#<div class=\"entry single\">(.*)</div>\s*<div cl
 
 $config['search']     = array("#<small>\s*<span class=\"upTop\">.*</small>#Uis");
 $config['replace']    = array("");
+$config['test_urls']  = array("http://www.nachdenkseiten.de/?p=31435", "http://www.nachdenkseiten.de/?p=31365");
 
 ?>
