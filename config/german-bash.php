@@ -7,5 +7,6 @@ $config['base_url']		= "http://german-bash.org";
 $config['content']		= array("#<div class=\"zitat\">(.*)</div>.*<div class=\"pre_next\">#Uis", 1);
 $config['search']		= array("#</span>#Uis");
 $config['replace']		= array("</span><br>");
+$config['test_urls'] = array("http://german-bash.org/357625", "http://german-bash.org/354719");
 
 ?>

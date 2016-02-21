@@ -16,5 +16,8 @@ $config['replace']		= array("<embed type=\"application/x-shockwave-flash\" src=\
 								"$1",
 								"");
 $config['split']		= array("#<link rel=\"next\" href=\"([^\"]*)\">#Uis", 1);
+$config['test_urls'] = array("http://www.golem.de/news/gear-360-im-hands-on-samsung-bringt-den-rundumblick-aufs-smartphone-1602-119263.html",
+                             "http://www.golem.de/news/update-skype-fuehrt-gruppen-videoanrufe-auf-mobilgeraeten-ein-1602-119248.html"
+                            );
 
 ?>
