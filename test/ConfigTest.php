@@ -1,6 +1,6 @@
 <?php
 
-require_once(__DIR__ . "/RssExtender.php");
+require_once(__DIR__ . "/../RssExtender.php");
 
 class ConfigTest extends PHPUnit_Framework_TestCase
 {

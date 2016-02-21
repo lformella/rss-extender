@@ -5,5 +5,5 @@ php:
   - '7.0'
   - hhvm
   - nightly
-script: phpunit .
+script: phpunit test/
 
