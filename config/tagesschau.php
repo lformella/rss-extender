@@ -21,4 +21,7 @@ $config['replace']		= array("",
 						        "<a $1>MP3</a> | <a $2>OGG</a></blockquote>",
 						        "<a $1>h.264 (klein)</a> | <a $2>h.264 (mittel)</a> | <a $3>WebM (mittel)</a> | <a $4>h.264 (groß)</a> | <a $5>WebM (groß)</a> | <a $6>h.264 (HD)</a></blockquote>",
 								"");
+$config['test_urls'] = array("https://www.tagesschau.de/ausland/brexit-grossbritannien-103.html",
+                             "https://www.tagesschau.de/inland/kindergeld-eu-auslaender-101.html"
+                            );
 ?>

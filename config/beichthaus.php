@@ -21,5 +21,6 @@ $config['replace']		= array("",
 								"",
 								"",
 								"");
+$config['test_urls'] = array("http://www.beichthaus.com/?h=index&c=00026536", "http://www.beichthaus.com/?h=index&c=00037629");
 
 ?>
