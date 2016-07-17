@@ -105,7 +105,7 @@ class Feed
 	/**
 	 * @param array $config
 	 */
-	public function Feed (array $config)
+	public function __construct (array $config)
 	{
 		if (array_key_exists("author", $config))
 		{

@@ -32,7 +32,7 @@ class RssExtender
 	private $itemNames = array("item", "entry");
 	private $timeNames = array("date", "updated", "pubDate");
 
-	public function RssExtender ()
+	public function __construct ()
 	{
 		$this->temporaryFolder = __DIR__ . "/tmp";
 		$this->configFolder = __DIR__ . "/config";
