@@ -8,10 +8,12 @@ $config['content']		= array("#<section class=\"body\" id=\"article-body\">(.*)<s
 
 $config['search'] = array("#<div class=\"ad\".*<!-- END ad tag.* -->#Uis",
   "#<figure class=\"teaserable.*</figure>#Uis",
+  "#<div class=\"flexible-teaser.*</div>\s</div>#Uis",
   "#<div id=\"article-sidebar-wrapper\".*</div>\s</div>#Uis",
   "#<section class=\"authors\">.*</section>#Uis",
   "#<script.*</script>#Uis");
 $config['replace'] = array("",
+                           "",
                            "",
                            "",
                            "",
