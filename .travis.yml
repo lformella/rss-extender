@@ -3,7 +3,13 @@ env:
 php:
   - '5.6'
   - '7.0'
+  - '7.1'
   - hhvm
   - nightly
-script: phpunit test/
-
+before_script:
+  - phpunit --version
+  - composer require phpunit/phpunit
+  - find .
+  - ./vendor/bin/phpunit --version
+script:
+  - ./vendor/bin/phpunit test/
