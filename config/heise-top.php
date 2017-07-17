@@ -1,27 +1,10 @@
 <?php
 
-$config['author']		= "Lars Formella";
-$config['author_url']	= "http://www.larsformella.de/portfolio/programme-software/rss-extender/";
-$config['url']			= "http://www.heise.de/newsticker/heise-top-atom.xml";
-$config['base_url']		= "http://www.heise.de";
-$config['content']		= array("#<div class=\"(meldung_wrapper|output_text|kicker_toc|article-content)\">(.*)</div>(\s+<!-- RSPEAK_STOP -->)?\s+<!--googleoff: all-->#Uis", 2);
-$config['search']		= array("#<span class=\"bildunterschrift\">.*<\/span>#Uis",
-								"#<span class=\"source\">.*<\/span>#Uis",
-								"#<h1>.*<\/h1>#Uis",
-								"#<!-- [a-z_-]+ -->#Uis",
-								"#<script.*>.*<\/script>#Uis",
-								"#<noscript>.*<\/noscript>#Uis",
-								"#<div class=\"video_titel\">[^<]*<\/div>#Uis",
-								"#<section class=\"themenseite_preisvergleich.*<\/section>#Uis",
-								"#http://www.heise.de//#Uis");
-$config['replace']		= array("",
-								"",
-								"",
-								"",
-								"",
-								"",
-								"",
-								"",
-								"//");
+include(__DIR__ . "/heise.php");
+
+$config['author']	= "Georg";
+$config['author_url']	= "https://github.com/sercxanto";
+$config['url']		= "http://www.heise.de/newsticker/heise-top-atom.xml";
+$config['test_urls']    = array("https://www.heise.de/newsticker/meldung/Lenke-ab-und-herrsche-Zensur-und-Propaganda-in-China-3770197.html?wt_mc=rss.ho.beitrag.atom", "https://www.heise.de/newsticker/meldung/Darknet-Marktplatz-AlphaBay-nach-Razzia-geschlossen-3771649.html?wt_mc=rss.ho.beitrag.atom");
 
 ?>
