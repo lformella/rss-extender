@@ -23,8 +23,8 @@ $config['replace']		= array("",
 								"",
 								"",
 								"");
-$config['test_urls'] = array("http://www.gulli.com/news/27142-john-mcafee-will-iphone-fuer-die-us-regierung-knacken-2016-02-19", 
-                             "http://www.gulli.com/news/27118-russland-zensiert-oeffentliche-sperrliste-2016-02-15"
-                            );
+#$config['test_urls'] = array("http://www.gulli.com/news/27142-john-mcafee-will-iphone-fuer-die-us-regierung-knacken-2016-02-19", 
+#                             "http://www.gulli.com/news/27118-russland-zensiert-oeffentliche-sperrliste-2016-02-15"
+#                            );
 
 ?>
