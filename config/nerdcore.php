@@ -4,7 +4,7 @@ $config['author']		= "Lars Formella";
 $config['author_url']	= "http://www.larsformella.de/portfolio/programme-software/rss-extender/";
 $config['url']			= "http://www.nerdcore.de/feed/";
 $config['base_url']		= "http://www.nerdcore.de";
-$config['content']		= array("#<section class=\"entry-section\">\s*<h1>[^<]*</h1>(.*)<div id=\"comments\" class=\"comments-area\">#Uis", 1);
+$config['content']		= array("#<section class=\"single-section\">\s*<h1>[^<]*</h1>(.*)<div id=\"comments\" class=\"comments-area\">#Uis", 1);
 $config['search'] =  array( "#<img.*data-lazy-type=\"image\".*<noscript>#Ui",
   "#</noscript>#Ui",
   "#<script.*</script>#Uis",
