@@ -1,8 +1,8 @@
 <?php
 $config['author']		= "Lars Formella";
 $config['author_url']	= "http://www.larsformella.de/portfolio/programme-software/rss-extender/";
-$config['url']			= "http://www.pnn.de/rss.xml";
-$config['base_url']		= "http://www.pnn.de/";
+$config['url']			= "https://www.pnn.de/contentexport/feed/home";
+$config['base_url']		= "https://www.pnn.de/";
 
 $config['content']		= array("#</h1>(.*)<div class=um-metabar>#Uis", 1);
 

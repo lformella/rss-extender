@@ -2,6 +2,6 @@
 
 include(__DIR__ . "/pnn.php");
 
-$config['url']			= "http://www.pnn.de/potsdam/rss.xml";
+$config['url']			= "https://www.pnn.de/contentexport/feed/potsdam";
 
 ?>
