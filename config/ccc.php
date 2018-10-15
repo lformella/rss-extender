@@ -9,6 +9,6 @@ $config['search'] 		= array("#<div(.*)>#Uis",
 					"#</div>#Uis");
 $config['replace'] 		= array("",
 					"");
-#$config['test_urls'] = array("https://www.ccc.de/de/updates/2016/smarthome", "https://www.ccc.de/de/updates/2014/ursel");
+$config['test_urls'] = array("https://www.ccc.de/de/updates/2016/smarthome", "https://www.ccc.de/de/updates/2014/ursel");
 
 ?>
