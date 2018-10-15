@@ -4,7 +4,7 @@ $config['author']		= "Lars Formella";
 $config['author_url']	= "http://www.larsformella.de/portfolio/programme-software/rss-extender/";
 $config['url']			= "http://www.heise.de/newsticker/heise-atom.xml";
 $config['base_url']		= "http://www.heise.de";
-$config['content']		= array("#<(div|p) (id=\"p_1\"\s+)?class=\"(meldung_wrapper|output_text|kicker_toc|article-content|article_page_intro|initial)[^>]*>(.*)</(div|p)>\s+(<!-- RSPEAK_STOP -->\s+)?(</section>\s+)?(<footer|<div class=\"clearcontent\"></div>)#Uis", 4);
+$config['content'] = array("#<(div|p) (id=\"p_1\"\s+)?class=\"(meldung_wrapper|output_text|kicker_toc|article-content|article_page_intro|initial|akwa-article__content)[^>]*>(.*)</(div|p)>\s+(<!-- RSPEAK_STOP -->\s+)?(</section>\s+)?(<footer|<div class=\"clearcontent\"></div>|<div class=\"article-footer__content\">)#Uis", 4);
 $config['search']		= array("#<span class=\"bildunterschrift\">.*<\/span>#Uis",
   "#<(div|aside)[ ]*class=\"[^\"]*(akwa-ad-container|bcadv).*<\/(noscript|aside)>#Uis",
   "#<span class=\"source\">.*<\/span>#Uis",
