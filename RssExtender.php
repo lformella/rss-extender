@@ -48,7 +48,7 @@ class RssExtender
 		{
 			while (false !== ($file = readdir($handle)))
 			{
-				if (is_file($this->configFolder . "/" . $file) && $file != "DEFAULT.php")
+				if (is_file($this->configFolder . "/" . $file) && $file != "DEFAULT.php" && substr($file, 0, 1) != ".")
 				{
 					$config = array();
 					require($this->configFolder . "/" . $file);
