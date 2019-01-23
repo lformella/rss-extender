@@ -2,3 +2,5 @@ tmp/
 *.swo
 *.swp
 *~
+vendor
+composer.lock

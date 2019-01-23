@@ -8,4 +8,9 @@ To use cache you need to create subfolder "tmp/" with write permissions (here us
 * $ mkdir tmp/
 * $ chown www-data: tmp/
 
+To enable [readability](https://github.com/andreskrey/readability.php) (fallback if regex rules fail) support:
+* install [composer](https://getcomposer.org/)
+* check that readability.php requirements (PHP 7.0+, ext-dom, ext-xml, and ext-mbstring) are installed
+* $ composer update
+
 For creating the regular expressions for the config files the web site http://regex101.com/ helps for testing.
