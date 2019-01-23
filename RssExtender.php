@@ -119,6 +119,10 @@ class RssExtender
 		}
 
 		$feedContent = $this->getContentOfUrl($feed->url);
+		if (! $feedContent)
+		{
+			return "<span style='font: #ff0000'>WARNING! Cannot open feed url: ". $feed->url . "!</span>";
+		}
 
 		$DOMDocument = new DOMDocument;
 		$DOMDocument->strictErrorChecking = false;
@@ -270,8 +274,13 @@ class RssExtender
 		else if (ini_get('allow_url_fopen'))
 		{
 			$originalUrlParts = parse_url($url);
-			$context = stream_context_create(array('http' => array('header' => "Host: ".$originalUrlParts["host"]."\r\nUser-Agent: rss-extender 0.6", 'follow_location' => false, 'max_redirects' => '3')));
-			$content = file_get_contents($url, false, $context);
+			$context = stream_context_create(array('http' => array('header' => "Host: ".$originalUrlParts["host"]."\r\nUser-Agent: rss-extender 0.6", 'follow_location' => true, 'max_redirects' => '3')));
+
+			$content = @file_get_contents($url, false, $context);
+			if (empty($content))
+			{
+				return false;
+			}
 
 			foreach ($http_response_header as $header)
 			{
@@ -326,13 +335,14 @@ class RssExtender
 	public function getFilteredContentOfUrl(Feed $feed, $url, $useCache, $time)
 	{
 		$file = $this->temporaryFolder . "/" . $feed->name . "/" . md5($url);
+		$originalContent = false;
 		// get the article from cache
 		if ($useCache && is_file($file) && filesize($file) > 0 && filemtime($file) == $time)
 		{
 			$originalContent = file_get_contents($file);
 		}
 		// load it from web
-		else
+		if (! $originalContent)
 		{
 			$originalContent = $this->getContentOfUrl($url);
 
@@ -342,6 +352,11 @@ class RssExtender
 				fclose($handle);
 				touch($file, $time);
 			}
+		}
+
+		if (! $originalContent)
+		{
+			return "<span style='font: #ff0000'>WARNING! Cannot open url: " . $url . "</span>";
 		}
 
 		// filter for main content
