@@ -23,6 +23,7 @@ $config['search']	= array("#<\/article>.*#is",    								// swr.de, br.de, ... 
 				"#<ul class=\"newSharing_func\">.*<\/ul>#Uis",
 				"#<h2.*>Neuer Abschnitt<\/h2>#Uis",							// Remove "Neuer Abschnitt"
 				"#<ul class=\"shares.*<\/ul>#Uis",
+				"#<div class=\"infokasten small\">\n<div class=\"teaser\">\n<h4 class=\"headline\">Mehr zum Thema.*<!-- infokasten -->#Uis"	// Remove first "Mehr zu diesem Thema"
 				);
 
 $config['replace']	= array("",							// swr.de, br.de, ... remove everything below article
@@ -43,6 +44,7 @@ $config['replace']	= array("",							// swr.de, br.de, ... remove everything bel
 				"",
 				"",							// remove "Neuer Abschnitt"
 				"",
+				"",							// remove first "Mehr zu diesem Thema"
 				);
 
 $config['test_urls']	= array("https://www.tagesschau.de/ausland/brexit-grossbritannien-103.html",
