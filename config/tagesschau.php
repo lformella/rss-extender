@@ -3,7 +3,7 @@
 $config['author']		= "Bernd Distler";
 $config['author_url']	= "http://blog.bernd-distler.net/";
 $config['url']			= "http://www.tagesschau.de/xml/rss2";
-$config['content']	= array("#(<div class=\"section sectionZ.*>|<article.*>|<div class=\"NewsArticle-container\".*>)(.*?)#Uis", 2);
+$config['content']	= array("#(<div class=[\"\']section sectionZ.*>|<article.*>|<div class=\"NewsArticle-container\".*>)(.*?)#Uis", 2);
 
 $config['search']	= array("#<\/article>.*#is",    								// swr.de, br.de, ... remove everything below article
 				"#<div class=\"section sectionC.*\">.*#is",						// tagesschau.de remove everthing below article
@@ -22,6 +22,7 @@ $config['search']	= array("#<\/article>.*#is",    								// swr.de, br.de, ... 
 				"#<div class=\"commentarea jsb_ jsb_toggle\" data-jsb=\'{}\'>.*#is",
 				"#<ul class=\"newSharing_func\">.*<\/ul>#Uis",
 				"#<h2.*>Neuer Abschnitt<\/h2>#Uis",							// Remove "Neuer Abschnitt"
+				"#<ul class=\"shares.*<\/ul>#Uis",
 				);
 
 $config['replace']	= array("",							// swr.de, br.de, ... remove everything below article
@@ -41,6 +42,7 @@ $config['replace']	= array("",							// swr.de, br.de, ... remove everything bel
 				"",
 				"",
 				"",							// remove "Neuer Abschnitt"
+				"",
 				);
 
 $config['test_urls']	= array("https://www.tagesschau.de/ausland/brexit-grossbritannien-103.html",
