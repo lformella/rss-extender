@@ -339,6 +339,13 @@ class RssExtender
 	 */
 	public function getFilteredContentOfUrl(Feed $feed, $url, $useCache, $time)
 	{
+		$baseUrl = $feed->baseUrl;
+		if ($baseUrl == "")
+		{
+			$parseUrl = parse_url($url);
+			$baseUrl = $parseUrl["scheme"] . "://" . $parseUrl["host"] . "/";
+		}
+
 		$file = $this->temporaryFolder . "/" . $feed->name . "/" . md5($url);
 		// get the article from cache
 		if ($useCache && is_file($file) && filesize($file) > 0 && filemtime($file) == $time)
@@ -372,13 +379,13 @@ class RssExtender
 			$filteredContent = $this->getFilteredContentOfUrlWithReadability($originalContent);
 		}
 
-		$filteredContent = $this->enhanceContent($feed, $feed->baseUrl, $filteredContent, true);
+		$filteredContent = $this->enhanceContent($feed, $url, $baseUrl, $filteredContent, true);
 
 		// empty -> use readability
 		if ($filteredContent == "" && $this->readability_enabled)
 		{
 			$filteredContent = $this->getFilteredContentOfUrlWithReadability($originalContent);
-			$filteredContent = $this->enhanceContent($feed, $feed->baseUrl, $filteredContent, false);
+			$filteredContent = $this->enhanceContent($feed, $url, $baseUrl, $filteredContent, false);
 		}
 
 		// multiple page splitting routine
@@ -389,7 +396,8 @@ class RssExtender
 			{
 				$filteredContent = preg_replace($feed->contentSplitRegex, "", $filteredContent);
 				$filteredContent .= "\n<br><hr><br>\n";
-				$filteredContent .= $this->getFilteredContentOfUrl($feed, $feed->baseUrl . $match[$feed->contentSplitRegexPosition], $useCache, $time);
+				$next_page = $match[$feed->contentSplitRegexPosition];
+				$filteredContent .= $this->getFilteredContentOfUrl($feed, $baseUrl . $next_page, $useCache, $time);
 			}
 		}
 
@@ -460,15 +468,15 @@ class RssExtender
 	 *
 	 * @return string
 	 */
-	private function enhanceContent(Feed $feed, $url, $filteredContent, $doSearchReplace)
+	private function enhanceContent(Feed $feed, $url, $baseUrl, $filteredContent, $doSearchReplace)
 	{
 		// image relative to absolute paths
 		$imagePath = substr($url, 0, strrpos($url, "/"));
-		$filteredContent = preg_replace("/(<(img|IMG)[^>]*[\s]+src[\s]*=[\s]*(\"|'))(\/)([^\"']+)(\"|')/i", "$1" . $feed->baseUrl . "/$5$3", $filteredContent);
+		$filteredContent = preg_replace("/(<(img|IMG)[^>]*[\s]+src[\s]*=[\s]*(\"|'))(\/)([^\"']+)(\"|')/i", "$1" . $baseUrl . "/$5$3", $filteredContent);
 		$filteredContent = preg_replace("/(<(img|IMG)[^>]*[\s]+src[\s]*=[\s]*(\"|'))([^\"':]+)(\"|')/i", "$1" . $imagePath . "/$4$3", $filteredContent);
 
 		// links relative to absolute paths
-		$filteredContent = preg_replace("/([\s]+href[\s]*=[\s]*(\"|'))(\/)([^\"']+)(\"|')/i", "$1" . $feed->baseUrl . "/$4$2", $filteredContent);
+		$filteredContent = preg_replace("/([\s]+href[\s]*=[\s]*(\"|'))(\/)([^\"']+)(\"|')/i", "$1" . $baseUrl . "/$4$2", $filteredContent);
 
 		// search and replace stuff
 		if ($doSearchReplace && is_array($feed->searchContent) && count($feed->searchContent) > 0)

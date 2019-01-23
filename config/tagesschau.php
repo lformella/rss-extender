@@ -3,7 +3,6 @@
 $config['author']		= "Bernd Distler";
 $config['author_url']	= "http://blog.bernd-distler.net/";
 $config['url']			= "http://www.tagesschau.de/xml/rss2";
-$config['base_url'] 	= "http://www.tagesschau.de";
 $config['content']	= array("#(<div class=\"section sectionZ.*>|<article.*>|<div class=\"NewsArticle-container\".*>)(.*?)#Uis", 2);
 
 $config['search']	= array("#<\/article>.*#is",    								// swr.de, br.de, ... remove everything below article
