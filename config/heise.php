@@ -27,6 +27,10 @@ $config['search']	= array(
   "#<p class=\"forum\">.*</p>#Uis",
   "#<a href=\".*\" class=\"comment\" name=\"spalte.mac-and-i.forenbeitrag.[0-9]+\">.*</a>#Us",
   "#<div id=\"zett_kasten.*</div>#Uis",
+  # remove all parts of the header except the image
+  "#<header[^>]*class=\"article-header\"[^>]*>.*<figure[^>]*class=\"article-image\"[^>]*>(.*)</figure>.*</header>#Uis",
+  # remove elements like "stellenmarkt"
+  "#<a-collapse[^>]*>.*</a-collapse>#Uis",
   "#http://www.heise.de//#Uis"
   );
 $config['replace'] = array(
@@ -50,6 +54,8 @@ $config['replace'] = array(
   "",
   "",
   "",
+  "",
+  '${1}', # insert the image from the header
   "",
   "//"
   );
