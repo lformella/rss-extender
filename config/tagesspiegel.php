@@ -12,9 +12,12 @@ $config['search']		= array('#<div[^>]*class="[^"]*ts-ad[^"]*"[^>]*>.*</div>#Uis'
 								'#<div class="ts-meta">.*</div>#Uis',
 								'#<h1[^>]*class="ts-title"[^>]*>.*</h1>#Uis',
 								'#<header[^>]*class="ts-article-header">.*<div[^>]*class="ts-subpage-header">.*</header>#Uis',
-								'#<div[^>]*class="ts-subpage-index">.*</a>.*</div>#Uis'
+								'#<div[^>]*class="ts-subpage-index">.*</a>.*</div>#Uis',
+								# remove "Tagesspiegel Checkpoint"
+								'#<figure[^>]*class="ts-checkpoint"[^>]*>.*</figure>#Uis'
 								);
 $config['replace']		= array('',
+								'',
 								'',
 								'',
 								'',
